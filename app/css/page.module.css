@@ -1,0 +1,32 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--color-primary);
+  font-family: 'Nunito';
+  padding: 1rem;
+}
+
+.page {
+  color: var(--color-white);
+}
+
+.container {
+  display: flex;
+  gap: var(--spacings-spacing-300);
+  flex-direction: column;
+}
+
+.container a {
+  font-size: var(--sizes-size-250);
+}
+
+.container p {
+  font-size: var(--sizes-size-250);
+}
+
+.title {
+  font-size: var(--sizes-size-550);
+  font-weight: 700;
+}
