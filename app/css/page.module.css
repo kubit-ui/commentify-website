@@ -41,13 +41,13 @@
 
 .oval {
   position: absolute;
-  width: 450px;
-  height: 375px;
+  width: 40%;
+  height: 55%;
   border-radius: 50%;
 }
 
 .oval1 {
-  animation: move1 10s infinite;
+  animation: move1 15s infinite linear;
   background: radial-gradient(
     51.1% 40.15% at 52.33% 53.49%,
     #47f3de 10.5%,
@@ -55,11 +55,12 @@
   );
   background-blend-mode: lighten;
   filter: blur(30px);
+  top: 0;
+  left: 0;
 }
 
 .oval2 {
-  animation: move2 15s infinite;
-  border-radius: 715.772px;
+  animation: move2 15s infinite linear;
   background: radial-gradient(
     51.1% 40.15% at 52.33% 53.49%,
     #8aa4ff 8.5%,
@@ -68,50 +69,80 @@
   background-blend-mode: lighten;
   filter: blur(30px);
   transform: rotate(25deg);
+  top: 50%;
+  right: 0;
 }
 
 @keyframes move1 {
   0% {
-    top: 0;
-    left: 0;
+    top: 10%;
+    left: 20%;
   }
-  25% {
-    top: 0;
-    left: calc(50% - 50px);
+  14.29% {
+    top: 30%;
+    left: 10%;
   }
-  50% {
-    top: calc(50% - 75px);
-    left: calc(50% - 50px);
+  28.57% {
+    top: 40%;
+    left: 0%;
   }
-  75% {
-    top: 0;
-    left: calc(100% - 100px);
+  42.86% {
+    top: 30%;
+    left: -10%;
+  }
+  57.14% {
+    top: 15%;
+    left: -15%;
+  }
+  71.43% {
+    top: 0%;
+    left: 0%;
+  }
+  85.71% {
+    top: -5%;
+    left: 10%;
   }
   100% {
-    top: 0;
-    left: 0;
+    top: 10%;
+    left: 20%;
   }
 }
 
 @keyframes move2 {
   0% {
-    top: 0;
-    right: 0;
+    top: 5%;
+    left: 37%;
+  }
+  12.5% {
+    top: -8%;
+    left: 45%;
   }
   25% {
-    top: 0;
-    right: calc(50% - 50px);
+    top: -15%;
+    left: 55%;
+  }
+  37.5% {
+    top: -10%;
+    left: 66%;
   }
   50% {
-    top: calc(50% - 75px);
-    right: calc(50% - 50px);
+    top: 5%;
+    left: 73%;
+  }
+  62.5% {
+    top: 15%;
+    left: 66%;
   }
   75% {
-    top: 0;
-    right: calc(100% - 100px);
+    top: 22%;
+    left: 60%;
+  }
+  87.5% {
+    top: 10%;
+    left: 45%;
   }
   100% {
-    top: 0;
-    right: 0;
+    top: 5%;
+    left: 37%;
   }
 }
