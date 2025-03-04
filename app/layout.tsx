@@ -1,39 +1,18 @@
 import type { Metadata } from 'next';
-import './css/globals.css';
-import './css/reset.css';
+import FloatingBubbles from './components/background/bubbles';
+import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.kubit-lab.com'),
-  title: 'Commentify.',
+  title: 'Commentify',
   description:
-    'Commentify is the tool you haveve been searching for to elevate communication and collaboration in your Figma design projects.',
-  openGraph: {
-    title: 'Commentify',
-    description:
-      'Commentify is the tool you haveve been searching for to elevate communication and collaboration in your Figma design projects.',
-    type: 'website',
-    locale: 'en_IE',
-    url: 'https://www.kubit-lab.com',
-    siteName: 'Commentify',
-    images: `/opengraph.png`,
-  },
-  authors: [{ name: 'Kubit', url: 'https://www.kubit-lab.com' }],
-  generator: 'Next.js',
-  keywords:
-    'opensource, figma, library, ui, design, github, plugin, commentify',
-  creator: 'Kubit',
-  publisher: 'Kubit',
-  category: 'Library Open Source',
-  applicationName: 'Kubit',
-  icons: {
-    icon: `/favicon.ico`,
-    shortcut: '/assets/ico.webp',
-    apple: '/assets/ico.webp',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/assets/ico.webp',
+    'Enhance your Figma experience with Commentify, a powerful plugin by Kubit for adding and managing comments.',
+  keywords: 'Figma, plugin, Commentify, Kubit, design, comments, collaboration',
+  authors: [
+    {
+      name: 'kubit',
     },
-  },
+  ],
+  robots: 'index, follow',
 };
 
 export default function RootLayout({
@@ -43,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <FloatingBubbles />
+        {children}
+      </body>
     </html>
   );
 }
