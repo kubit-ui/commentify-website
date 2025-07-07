@@ -1,0 +1,39 @@
+/* Base styles for footer button zoom container */
+.zoomFooter {
+  position: relative;
+  width: 80%;
+  min-width: var(--size-1800);
+  overflow: hidden;
+  border-radius: var(--border-radius-xlarge);
+  cursor: pointer;
+  border: var(--border-25) solid var(--card-border);
+  
+  /* Remove top border and radius */
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  background-color: var(--card-background);
+  color: var(--card-foreground);
+
+  /* Add transition for border properties */
+  transition: border-left 0.3s ease-in-out, border-bottom-left-radius 0.3s ease-in-out;
+}
+
+/* Content and Footer container styles */
+.zoomFooter__content, .zoomFooter__footer {
+  transition: all 0.8s ease-in-out;
+  transform-origin: center center;
+}
+
+/* Improved zoom effect focusing on delete button - activates on hover */
+.zoomFooter:hover .zoomFooter__content, .zoomFooter:hover .zoomFooter__footer  {
+  /* Scale and position to focus on the delete button */
+  transform: scale(2.2) translateX(-25%) translateY(-25%);
+}
+
+/* New hover state for the container to remove left border and bottom-left radius */
+.zoomFooter:hover {
+  border-left: 0px solid transparent;
+  border-bottom-left-radius: 0;
+}

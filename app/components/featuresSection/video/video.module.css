@@ -1,0 +1,11 @@
+.videoContainer {
+  position: relative;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  background-color: var(--card-background);
+}
+
+.video {
+  width: 100%;
+  height: auto;
+}

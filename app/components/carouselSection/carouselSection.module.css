@@ -1,0 +1,29 @@
+
+.carouselSection {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: var(--spacing-550) var(--spacing-500);
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.carouselSection::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.carouselSection__cards > * {
+    min-width: var(--size-2500); /* Ancho mínimo */
+}
+
+.carouselSection__cards {
+    display: flex;
+    gap: var(--spacing-500);
+}
+
+@media (max-width: 768px) {
+    .carouselSection__cards > * {
+        min-width: var(--size-2000); /* Adjusted minimum width for smaller screens */
+    }
+}

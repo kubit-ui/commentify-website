@@ -1,0 +1,28 @@
+/* General container */
+.spreadCards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Interactivity indicator */
+}
+
+/* General style for cards */
+.spreadCards__card {
+    position: absolute; /* Absolute to manage z-index */
+    transform-origin: right center; /* Right side is the rotation axis */
+    transition: transform 1s ease, translate 1s ease;
+    z-index: calc(var(--index) + 1);
+    /* Initial staggered positioning to subtly show cards behind */
+    transform: translateX(calc(var(--index) * -2px)) 
+               translateY(calc(var(--index) * 2px));
+}
+
+.spreadCards:hover .spreadCards__card {
+    transform: rotate(calc((var(--index) - (var(--total-cards) - 1) / 2) * -10deg))
+               translate(
+                 calc((-12px + (var(--index) * 0.5px)) * var(--index)), 
+                 calc((var(--index) - (var(--total-cards) - 1) / 2) * 12px)
+               );
+}

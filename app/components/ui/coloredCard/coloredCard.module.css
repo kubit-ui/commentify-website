@@ -1,0 +1,146 @@
+.coloredCard {
+    --card-background: #FFFFFF;
+    --card-foreground: #282B67;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-xlarge);
+    color: var(--card-foreground);
+    width: 100%;
+    max-width: var(--size-3000);
+    height: fit-content;
+    /* value taken from design directly */
+    border: var(--border-25) solid var(--card-border);
+    box-shadow: var(--box-shadow-25) var(--card-shadow);
+}
+
+/* STYLES FOR THE CARD HEADER */
+
+.coloredCard__header {
+    display: flex;
+    gap: var(--spacing-200);
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--spacing-350) var(--spacing-350) var(--spacing-200);
+  }
+  
+.coloredCard__header__bullet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-200);
+    border-radius: var(--border-radius-xxlarge);
+    color: var(--card-foreground);
+    width: var(--size-300);
+    height: var(--size-300);
+    /* value taken from design, these values should be generalised as variables */
+    border: var(--border-25) solid var(--bullet-border);
+    background: var(--bullet-background);
+    font-size: var(--font-size-xsmall);
+    font-weight: var(--font-weight-bold);
+}
+
+.coloredCard__header__title {
+    flex-grow: 1; /* Allow the title to take up remaining space */
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+}
+
+.coloredCard__header__date {
+    margin-left: auto; /* Push the date to the far right */
+    color: var(--card-foreground);
+    font-size: var(--font-size-xsmall);
+}
+
+  /* STYLES FOR THE CARD CONTENT */
+
+.coloredCard__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-200);
+    padding: var(--spacing-300) var(--spacing-350) var(--spacing-350);
+}
+
+.coloredCard__content__title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-small);
+}
+
+.coloredCard__content__description {
+    font-size: var(--font-size-small);
+    white-space: pre-wrap; /* Permite saltos de línea y ajusta el texto al ancho del contenedor */
+    word-wrap: break-word; /* Rompe palabras largas para evitar desbordamientos */
+    overflow-wrap: break-word; /* Compatibilidad adicional para romper palabras largas */
+    color: var(--card-foreground);
+    margin: var(--spacing-00);
+    padding: var(--spacing-00);
+}
+
+/* STYLES FOR THE CARD FOOTER */
+
+.coloredCard__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: var(--footer-background);
+    padding: var(--spacing-350);
+    border-radius: 0 0 var(--border-radius-xlarge) var(--border-radius-xlarge);
+}
+
+@media (max-width: 768px) {
+    .coloredCard {
+        width: 100%; /* Ensure full width on smaller screens */
+        /* width: var(--size-1500); */
+    }
+
+    .coloredCard__header {
+        padding: var(--spacing-300) var(--spacing-300) var(--spacing-150);
+    }
+
+    .coloredCard__header__title {
+        font-size: var(--font-size-small); /* Adjust title size for smaller screens */
+    }
+
+    .coloredCard__header__bullet {
+        width: var(--size-250); /* Adjust bullet size for smaller screens */
+        height: var(--size-250);
+        font-size: var(--font-size-xxsmall); /* Adjust bullet font size */
+    }
+
+    .coloredCard__header__date {
+        font-size: var(--font-size-xxxsmall); /* Adjust date size for smaller screens */
+    }
+
+    .coloredCard__content {
+        padding: var(--spacing-150) var(--spacing-300);
+    }
+
+    .coloredCard__content__title {
+        font-size: var(--font-size-xsmall); /* Adjust content title size */
+    }
+    .coloredCard__content__description {
+        font-size: var(--font-size-xxsmall); /* Adjust description size */
+    }
+
+    .coloredCard__footer {
+        padding: var(--spacing-300);
+    }
+}
+
+@media (max-width: 480px) {
+    .coloredCard {
+        width: 100%; /* Ensure full width on very small screens */
+    }
+
+    .coloredCard__header__title {
+        font-size: var(--font-size-xsmall); /* Further reduce title size */
+    }
+
+    .coloredCard__content {
+        padding: var(--spacing-300); /* Further reduce content padding */
+    }
+}

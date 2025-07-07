@@ -1,0 +1,237 @@
+/* 
+ * FEATURES SECTION STYLES
+ * Main component styles for the features section
+ */
+
+/* Main container
+-------------------------------------------------- */
+.featuresSection {
+    width: 100%;
+    padding: var(--spacing-00) var(--spacing-550);
+}
+
+/* Features card container
+-------------------------------------------------- */
+.featuresSection__featuresCard {
+    display: flex;
+    padding: var(--spacing-600) var(--spacing-650);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--spacing-600);
+    border-radius: var(--border-radius-xxlarge);
+    background: var(--foreground);
+}
+
+/* Introduction section with cards and accordion
+-------------------------------------------------- */
+.featuresSection__featuresCard__intro {
+    display: flex;
+    gap: var(--spacing-500);
+}
+
+/* Card container inside the intro section
+-------------------------------------------------- */
+.featuresSection__featuresCard__intro__cardContainer {
+    display: flex;
+    gap: var(--spacing-400);
+    padding-top: var(--spacing-350);
+    flex: 3;
+}
+
+/* Card columns layout
+-------------------------------------------------- */
+.featuresSection__featuresCard__intro__cardContainer__cardColumn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    gap: var(--spacing-350);
+}
+
+.featuresSection__featuresCard__intro__cardContainer__cardColumn--right {
+    margin-top: 10%;
+    flex: 1;
+}
+
+/* Accordion component in the intro
+-------------------------------------------------- */
+.featuresSection__featuresCard__intro__accordion {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.featuresSection__featuresCard__intro__accordion__title {
+    color: var(--background);
+    font-size: var(--font-size-xxlarge);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Main content grid layout
+-------------------------------------------------- */
+.featuresSection__featuresCard__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    width: 100%;
+    gap: var(--spacing-400);
+    
+    /* Align items in the center vertically */
+    align-items: center;
+}
+
+/* Individual section styling 
+-------------------------------------------------- */
+.featuresSection__featuresCard__content__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-200);
+    min-width: var(--size-1500);
+    
+    
+    /* Set a minimum height to ensure all sections have the same height */
+    min-height: var(--size-2500); /* Adjust this value based on your tallest component */
+}
+
+/* Section titles
+-------------------------------------------------- */
+.featuresSection__featuresCard__content__title {
+    color: var(--background);
+    font-size: var(--font-size-xxlarge);
+    font-weight: var(--font-weight-bold);
+    margin: var(--spacing-500) 0;
+    text-align: center;
+}
+
+/* Center components vertically in sections
+-------------------------------------------------- */
+.featuresSection__featuresCard__content__section-content {
+    flex: 1;
+    display: flex;
+    align-items: center; /* Centers the component vertically */
+    justify-content: center;
+    width: 100%;
+}
+
+/* Video container
+-------------------------------------------------- */
+.featuresSection__featuresCard__video {
+    display: flex;
+    align-items: center;
+}
+
+/* RESPONSIVE STYLES
+-------------------------------------------------- */
+
+@media (max-width: 1250px) {
+    /* Content grid responsive - changes to 2 columns */
+    .featuresSection__featuresCard__content {
+        min-width: var(--size-1800);
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-300);
+    }
+    /* Third item centered in second row */
+    .featuresSection__featuresCard__content > *:nth-child(3) {
+        grid-column: 1 / 3; /* Span across both columns */
+        justify-self: center; /* Center horizontally */
+    }
+}
+
+/* Tablet Breakpoint (max-width: 900px) */
+@media (max-width: 1100px) {
+    .featuresSection {
+        /* Adjust header padding */
+        padding: var(--spacing-00) var(--spacing-300);
+    }
+    /* Features card container responsive */
+    .featuresSection__featuresCard {
+        padding: var(--spacing-400) var(--spacing-350);
+        gap: var(--spacing-450);
+    }
+    
+    /* Intro section responsive */
+    .featuresSection__featuresCard__intro {
+        flex-direction: column;
+        align-items: center;
+    }
+        
+    /* Section title responsive */
+    .featuresSection__featuresCard__content__title {
+        font-size: var(--font-size-xlarge);
+    }
+    
+    /* Section height responsive */
+    .featuresSection__featuresCard__content__section {
+        min-height: var(--size-1800);
+        min-width: var(--size-1800);
+    }
+
+    .featuresSection__featuresCard__intro__accordion {
+        padding: var(--spacing-00) var(--spacing-450);
+    }
+    
+    /* Accordion title responsive */
+    .featuresSection__featuresCard__intro__accordion__title {
+        font-size: var(--font-size-xlarge);
+        text-align: center;
+    }
+
+    .featuresSection__featuresCard__video {
+        margin-top: var(--spacing-350);
+    }
+}
+
+/* Custom breakpoint for animations column */
+@media (max-width: 600px) {
+    /* Content grid responsive - changes to 1 column */
+    .featuresSection__featuresCard__content {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-00) var(--spacing-200);
+    }
+    
+    /* Third item centered in second row */
+    .featuresSection__featuresCard__content > *:nth-child(3) {
+        grid-column: 1; /* Reset to single column */
+    }
+}
+
+/* Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Features card container responsive */
+    .featuresSection__featuresCard {
+        gap: var(--spacing-300);
+    }
+
+    
+    /* Section title responsive */
+    .featuresSection__featuresCard__content__title {
+        font-size: var(--font-size-large);
+        margin: var(--spacing-300) 0;
+    }
+    
+    /* Section height responsive */
+    .featuresSection__featuresCard__content__section {
+        padding-bottom: var(--spacing-300);
+    }
+
+    .featuresSection__featuresCard__intro__accordion {
+        padding: var(--spacing-00) var(--spacing-300);
+    }
+    
+    /* Accordion title responsive */
+    .featuresSection__featuresCard__intro__accordion__title {
+        font-size: var(--font-size-large);
+    }
+    
+    /* Card container responsive */
+    .featuresSection__featuresCard__intro__cardContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Right card column responsive */
+    .featuresSection__featuresCard__intro__cardContainer__cardColumn--right {
+        margin-top: var(--spacing-200);
+    }
+}

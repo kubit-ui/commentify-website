@@ -1,0 +1,254 @@
+/* 
+ * HERO SECTION STYLES
+ * Main component styles for the hero section landing
+ */
+
+/* Main container
+-------------------------------------------------- */
+.heroSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-500);
+    padding: var(--spacing-00) var(--spacing-550);
+}
+
+/* Header container
+-------------------------------------------------- */
+.heroSection__header {
+    display: flex;
+    gap: var(--spacing-450);
+    width: 100%;
+}
+
+/* Left side of header with main content
+-------------------------------------------------- */
+.heroSection__header--left {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    gap: var(--spacing-500);
+    padding-top: var(--spacing-550);
+}
+
+/* Logo in left header
+-------------------------------------------------- */
+.heroSection__header--left__logocontainer {
+    display: flex;
+    gap: var(--spacing-400);
+    align-items: center;
+}
+.heroSection__header--left__logo {
+    width: 100%; /* Adjust logo size as needed */
+    max-width: 150px;
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Text next to Logo 
+-------------------------------------------------- */
+.heroSection__header--left__logo__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-100)
+}
+.heroSection__header--left__title {
+    width: 100%; /* Adjust logo size as needed */
+    min-width: 180px;
+    height: auto; /* Maintain aspect ratio */
+}
+.heroSection__header--left__logo__subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-100)
+}
+
+/* Text content in left header
+-------------------------------------------------- */
+.heroSection__header--left__text {
+    font-size: var(--font-size-xlarge);
+}
+
+/* Card container in header
+-------------------------------------------------- */
+.heroSection__header__cardContainer {
+    display: flex;
+    flex: 3;
+    gap: var(--spacing-400);
+    padding-top: var(--spacing-350);
+    mask-image: linear-gradient(to top, transparent, var(--background) 20%);
+}
+
+/* Card columns in card container
+-------------------------------------------------- */
+.heroSection__header__cardContainer__cardColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+}
+
+/* Right column offset
+-------------------------------------------------- */
+.heroSection__header__cardContainer__cardColumn--right {
+    margin-top: 10%;
+}
+
+/* Bottom info section with CTA
+-------------------------------------------------- */
+.heroSection__bottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: var(--font-size-xlarge);
+    gap: var(--spacing-400);
+}
+
+/* CTA discover button
+-------------------------------------------------- */
+.heroSection__bottomInfo__discoverButton {
+    display: flex;
+    width: fit-content;
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    color: var(--background);
+    text-decoration: none;
+    padding: var(--spacing-200) var(--spacing-350);
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-200);
+    border-radius: var(--border-radius-xxlarge);
+    border: var(--border-25) solid var(--border-button);
+    background: var(--foreground);
+    cursor: pointer;
+    position: relative; /* Required for the overlay */
+    overflow: hidden; /* Ensures the overlay doesn't spill out */
+}
+
+/* Button hover effect
+-------------------------------------------------- */
+.heroSection__bottomInfo__discoverButton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(231, 231, 231, 0.25);
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Ensure the overlay is above the button content */
+}
+
+.heroSection__bottomInfo__discoverButton:hover::after {
+    opacity: 1;
+}
+
+/* Tablet Breakpoint (max-width: 900px) */
+@media (max-width: 1100px) {
+    .heroSection {
+        /* Adjust header padding */
+        padding: var(--spacing-00) var(--spacing-300);
+    }
+    /* Header layout changes to vertical */
+    .heroSection__header {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-400);
+        padding-top: var(--spacing-500);
+    }
+
+    .heroSection__header__cardContainer {
+        padding: var(--spacing-00) var(--spacing-400);
+        gap: var(--spacing-300);
+    }
+
+    /* Left header adjustments */
+    .heroSection__header--left {
+        padding-top: var(--spacing-300);
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Font size reduction */
+    .heroSection__header--left__text {
+        font-size: var(--font-size-xlarge);
+    }
+
+    /* Center card container */
+    .heroSection__header__cardContainer {
+        justify-content: center;
+    }
+
+    /* Bottom text size adjustment */
+    .heroSection__bottomInfo {
+        font-size: var(--font-size-xlarge);
+    }
+}
+
+/* Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+    
+    /* Card container changes to vertical layout */
+    .heroSection__header__cardContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Remove offset for right column */
+    .heroSection__header__cardContainer__cardColumn--right {
+        margin-top: var(--spacing-00);
+        width: 100%;
+    }
+
+    /* Further font size reduction */
+    .heroSection__header--left__text {
+        font-size: var(--font-size-medium);
+    }
+
+    .heroSection__header--left__logocontainer {
+        flex-direction: column;
+    }
+
+    .heroSection__header--left__logo__text {
+        align-items: center;
+    }
+
+    /* Bottom info adjustments */
+    .heroSection__bottomInfo {
+        font-size: var(--font-size-medium);
+        padding: 0 var(--spacing-300);
+    }
+
+    /* Button size reduction */
+    .heroSection__bottomInfo__discoverButton {
+        font-size: var(--font-size-small);
+        padding: var(--spacing-100) var(--spacing-300);
+    }
+}
+
+/* Animation styles - commented out for now 
+-------------------------------------------------- */
+/* .slide-up {
+    position: relative;
+    bottom: -100%;
+    animation: slideUp 2s forwards;
+}
+
+.delay-0 {
+    animation-delay: 0s;
+}
+
+.delay-3 {
+    animation-delay: 2s;
+}
+
+.delay-6 {
+    animation-delay: 4s;
+}
+
+@keyframes slideUp {
+    0% {
+        bottom: -100%;
+    }
+    100% {
+        bottom: 0;
+    }
+} */

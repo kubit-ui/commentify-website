@@ -1,0 +1,177 @@
+/* Base styles for zoom containers */
+.zoom-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: var(--border-radius-xlarge);
+  cursor: pointer;
+  border: 1px solid var(--card-border);
+  box-shadow: none; /* Override the box-shadow from coloredCard classes */
+}
+
+/* Remove bottom border for content zoom container */
+.zoom-container--content {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Remove top border for button zoom container */
+.zoom-container--button {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.zoom-container__view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  transform-origin: center center;
+  background-color: var(--foreground);
+}
+
+/* Content zoom effect - activates on hover */
+.zoom-container--content:hover .zoom-container__view {
+  transform: scale(1.5) translateY(-15%);
+}
+
+.zoom-container--content:hover .zoom-container__header {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+/* Button zoom effect - activates on hover */
+.zoom-container--button:hover .zoom-container__view {
+  transform: scale(2.2) translateX(15%) translateY(15%);
+}
+
+.zoom-container--button:hover .zoom-container__content,
+.zoom-container--button:hover .zoom-container__footer__button:not(.zoom-container__footer__button--delete) {
+  opacity: 0.3;
+}
+
+/* Transition properties for smooth animations */
+.zoom-container__header, 
+.zoom-container__content, 
+.zoom-container__footer, 
+.zoom-container__footer__button {
+  transition: opacity 0.5s ease-in-out, transform 0.6s ease-in-out;
+}
+
+/* Styles for card elements */
+.zoom-container__header {
+  display: flex;
+  gap: var(--spacing-200);
+  align-items: center;
+  padding: var(--spacing-350) var(--spacing-350) var(--spacing-200);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.zoom-container__header__bullet {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bullet-background);
+  border: 1px solid var(--bullet-border);
+  color: var(--foreground);
+  font-weight: bold;
+  font-size: var(--font-size-small);
+}
+
+.zoom-container__header__title {
+  flex-grow: 1;
+  font-weight: 500;
+  color: var(--background);
+}
+
+.zoom-container__header__date {
+  font-size: 12px;
+  color: var(--background);
+  opacity: 0.7;
+}
+
+/* Change content styles based on container type */
+.zoom-container__content {
+  padding: var(--spacing-300);
+  color: var(--background);
+}
+
+/* For button zoom container, make the content take less space */
+.zoom-container--button .zoom-container__content {
+  padding-bottom: var(--spacing-100);
+  height: calc(100% - 60px); /* Ajustar altura para dejar espacio al footer */
+  overflow: hidden;
+}
+
+.zoom-container__content__title {
+  margin-bottom: var(--spacing-200);
+  font-weight: 500;
+  color: var(--background);
+}
+
+.zoom-container__content__description {
+  white-space: pre-wrap;
+  color: var(--background);
+  font-family: inherit;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Position the footer at the bottom */
+.zoom-container__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-200);
+  border-top: 1px solid var(--card-border);
+  background-color: var(--footer-background);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.zoom-container__footer__button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  padding: var(--spacing-100) var(--spacing-200);
+  cursor: pointer;
+  border-radius: var(--border-radius-medium);
+}
+
+.zoom-container__footer__button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.zoom-container__footer__button__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.zoom-container__footer__button__label {
+  font-size: 14px;
+  color: var(--background);
+}
+
+/* Color variations */
+.zoom-container--pink .zoom-container__view {
+  background-color: var(--pink-100);
+}
+
+.zoom-container--blue .zoom-container__view {
+  background-color: var(--blue-100);
+}
+
+.zoom-container--green .zoom-container__view {
+  background-color: var(--green-100);
+}
+
+.zoom-container--orange .zoom-container__view {
+  background-color: var(--orange-100);
+}

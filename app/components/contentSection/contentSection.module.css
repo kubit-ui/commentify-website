@@ -1,0 +1,65 @@
+/* 
+ * CONTENT SECTION STYLES
+ * Main component styles for the content text section
+ */
+
+/* Main container
+-------------------------------------------------- */
+.contentSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--spacing-550) var(--spacing-550);
+}
+
+/* Text content with consistent styling
+-------------------------------------------------- */
+.contentSection__text {
+    font-size: var(--font-size-xxlarge);
+    text-align: center;
+}
+
+/* Paragraph spacing
+-------------------------------------------------- */
+.contentSection__text p:not(:last-child) {
+    margin-bottom: var(--spacing-400);
+}
+
+/* RESPONSIVE STYLES
+-------------------------------------------------- */
+
+/* Tablet Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Adjust container padding */
+    .contentSection {
+        padding: var(--spacing-400) var(--spacing-400);
+    }
+
+    /* Reduce text size */
+    .contentSection__text {
+        font-size: var(--font-size-xlarge);
+    }
+
+    /* Reduce paragraph spacing */
+    .contentSection__text p:not(:last-child) {
+        margin-bottom: var(--spacing-300);
+    }
+}
+
+/* Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Further reduce container padding */
+    .contentSection {
+        padding: var(--spacing-300) var(--spacing-300);
+    }
+
+    /* Further reduce text size and change alignment for readability */
+    .contentSection__text {
+        font-size: var(--font-size-large);
+    }
+
+    /* Minimal paragraph spacing */
+    .contentSection__text p:not(:last-child) {
+        margin-bottom: var(--spacing-200);
+    }
+}

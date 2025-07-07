@@ -1,0 +1,116 @@
+/* 
+ * FOOTER STYLES
+ * Main component styles for the page footer
+ */
+
+/* Main container
+-------------------------------------------------- */
+.footer {
+    display: flex;
+    width: 100vw;
+    padding: var(--spacing-350) var(--spacing-400);
+    padding-top: 0;
+    color: var(--background);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Footer content wrapper
+-------------------------------------------------- */
+.footer__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--foreground);
+    border-radius: var(--border-radius-xxlarge);
+    box-shadow: 4px 4px rgba(40, 43, 103, 0.25);
+}
+
+/* Footer links
+-------------------------------------------------- */
+.footer__content a {
+    color: var(--background);
+}
+
+/* Top footer section
+-------------------------------------------------- */
+.footer__content--top {
+    display: flex;
+    width: 100%;
+    padding: var(--spacing-400) var(--spacing-550);
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #D0D1E5;
+}
+
+/* Support links container
+-------------------------------------------------- */
+.footer__content--top__support {
+    display: flex;
+    gap: var(--spacing-100);
+}
+
+/* Bottom footer section
+-------------------------------------------------- */
+.footer__content--bottom {
+    display: flex;
+    width: 100%;
+    padding: var(--spacing-400) var(--spacing-550);
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Social media links
+-------------------------------------------------- */
+.footer__content--bottom__social {
+    display: flex;
+    gap: var(--spacing-300);
+}
+
+/* RESPONSIVE STYLES
+-------------------------------------------------- */
+
+/* Tablet Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Adjust container padding */
+    .footer {
+        padding: var(--spacing-200) var(--spacing-200);
+    }
+
+    /* Reduce border radius */
+    .footer__content {
+        border-radius: var(--border-radius-xlarge);
+    }
+
+    /* Adjust sections padding and enable flex wrap */
+    .footer__content--top, 
+    .footer__content--bottom {
+        padding: var(--spacing-300) var(--spacing-350);
+        flex-wrap: wrap;
+        gap: var(--spacing-300);
+    }
+}
+
+/* Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Change top section to vertical layout */
+    .footer__content--top {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-300);
+    }
+
+    /* Change bottom section to vertical layout */
+    .footer__content--bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-300);
+    }
+
+    /* Add space above social links */
+    .footer__content--bottom__social {
+        margin-top: var(--spacing-200);
+    }
+}

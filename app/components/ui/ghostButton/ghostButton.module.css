@@ -1,0 +1,35 @@
+/* STYLES FOR THE GHOST BUTTON */
+
+.ghostButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-200);
+    background: none;
+    border: none;
+    color: var(--card-foreground);
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+}
+  
+.ghostButton .label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    text-decoration-color: var(--card-foreground);
+    transition: text-decoration-color 0.25s ease-in-out;
+}
+
+.ghostButton:hover .label {
+    text-decoration-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .ghostButton .label {
+        font-size: var(--font-size-xsmall);
+    }
+}

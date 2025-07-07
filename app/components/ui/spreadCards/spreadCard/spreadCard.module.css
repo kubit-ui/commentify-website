@@ -1,0 +1,71 @@
+/* Styles for the simplified card used in spread layout */
+.spreadCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+  width: var(--size-1800);
+  height: var(--size-750);
+  padding: var(--spacing-300) var(--spacing-350);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-xlarge) var(--border-radius-large) 
+  var(--border-radius-large) var(--border-radius-large);
+  box-shadow: var(--box-shadow-25) rgba(0, 0, 0, 0.1);
+  color: var(--card-foreground);
+  border: none; /* We remove the default border */
+  overflow: visible; /* We allow the pseudo-element to extend */
+  box-sizing: border-box; /* Ensures padding and border don't increase size */
+}
+
+/* Pseudo-element for the border */
+.spreadCard::before {
+  content: "";
+  position: absolute;
+  /* We adjust the position to make the pseudo-element smaller */
+  top: 0;
+  left: 0;
+  width: calc(var(--size-1800) - 0.65rem);
+  height: calc(var(--size-750) - 0.65rem);
+  border: var(--border-25) solid var(--card-border);
+  /* We apply border-radius only to the top-left corner */
+  border-radius: var(--border-radius-xlarge) 0 0 0;
+  /* We only show the top and left borders */
+  border-right-color: var(--card-background);
+  border-bottom-color: var(--card-background);
+  /* We ensure it's below the content */
+  z-index: 0;
+  pointer-events: none;
+  /* We ensure the border is exactly at the container boundaries */
+  box-sizing: border-box;
+}
+
+.spreadCard__bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-100);
+  border-radius: var(--border-radius-xxlarge);
+  color: var(--card-foreground);
+  width: var(--size-300);
+  height: var(--size-300);
+  border: var(--border-25) solid var(--bullet-border);
+  background: var(--bullet-background);
+  font-size: var(--font-size-xsmall);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1; /* Ensures it's above the pseudo-element */
+}
+
+.spreadCard__title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-medium);
+  position: relative;
+  z-index: 1; /* Ensures it's above the pseudo-element */
+}
+
+.spreadCard__date {
+  margin-left: auto;
+  color: var(--card-foreground);
+  font-size: var(--font-size-xsmall);
+}

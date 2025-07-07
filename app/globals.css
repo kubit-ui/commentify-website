@@ -8,8 +8,120 @@
 :root {
   --background: #282B67;
   --foreground: #FFFFFF;
+  --card-background: #FFFFFF;
+  --card-foreground: #282B67;
   --light-blue-bubble: #48F4DF;
   --dark-blue-bubble: #8AA4FF;
+  --border-button: #8487C2;
+
+  /* Spacing */
+  --spacing-00: 0rem; /* 0px */
+  --spacing-100: 0.25rem; /* 4px */
+  --spacing-150: 0.375rem; /* 6px */
+  --spacing-200: 0.5rem;  /* 8px */
+  --spacing-250: 0.75rem;  /* 12px */
+  --spacing-300: 1rem;    /* 16px */
+  --spacing-350: 1.5rem;  /* 24px */
+  --spacing-400: 2rem;    /* 32px */
+  --spacing-450: 3rem;    /* 48px */
+  --spacing-500: 4rem;    /* 64px */
+  --spacing-550: 6rem;    /* 88px */
+  --spacing-600: 8rem;    /* 128px */
+  --spacing-650: 9rem;    /* 144px */
+  --spacing-700: 10rem;   /* 160px */
+  --spacing-800: 12rem;   /* 192px */
+
+  /* Sizes */
+  --size-100: 0.25rem; /* 4px */
+  --size-200: 0.5rem;  /* 8px */
+  --size-250: 0.75rem;  /* 12px */
+  --size-300: 1rem;    /* 16px */
+  --size-750: 5.5rem;  /* 88px */
+  --size-1000: 10rem;  /* 160px */
+  --size-1200: 12rem;  /* 192px */
+  --size-1500: 14rem;  /* 224px */
+  --size-1800: 16rem;  /* 256px */
+  --size-2000: 20rem;  /* 320px */
+  --size-2500: 25rem;  /* 400px */
+  --size-3000: 30rem;  /* 480px */
+
+
+
+  /* Font sizes */
+  --font-size-xxxsmall: 0.5rem; /* 8px */
+  --font-size-xxsmall: 0.625rem; /* 10px */
+  --font-size-xsmall: 0.75rem; /* 12px */
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-medium: 1.125rem; /* 18px */
+  --font-size-large: 1.25rem;  /* 20px */
+  --font-size-xlarge: 1.5rem;  /* 24px */
+  --font-size-xxlarge: 2rem;   /* 32px */
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Border radius */
+  --border-radius-small: 4px;
+  --border-radius-base: 8px;
+  --border-radius-large: 16px;
+  --border-radius-xlarge: 24px;
+  --border-radius-xxlarge: 40px;
+
+  /* Borders */
+  --border-25: 0.0875rem; /* 1px */
+
+  /* Box shadows */
+  --box-shadow-25: 0px 2px 12px 0px;
+
+  /* Media Queries */
+  --breakpoint-mobile: 640px; /* 640px and below */
+  --breakpoint-tablet: 768px; /* 641px to 768px */
+}
+
+
+
+/* Color palette classes */
+.coloredCard-orange {
+  --card-border: #BD5A00;
+  --card-shadow: rgba(255, 202, 154, 0.25);
+  --bullet-background: #FFB36E;
+  --bullet-border: #BD5A00;
+  --footer-background: #FFF7F1;
+}
+
+.coloredCard-green {
+  --card-border: #2B8F82;
+  --card-shadow: rgba(127, 247, 233, 0.25);
+  --bullet-background: #48F4DF;
+  --bullet-border: #29897E;
+  --footer-background: #EDFEFC;
+}
+
+.coloredCard-blue {
+  --card-border: #536299;
+  --card-shadow: rgba(174, 191, 255, 0.25);
+  --bullet-background: #8BA4FF;
+  --bullet-border: #536299;
+  --footer-background: #F3F6FF;
+}
+
+.coloredCard-pink {
+  --card-border: #994D96;
+  --card-shadow: rgba(255, 167, 252, 0.25);
+  --bullet-background: #FF81FA;
+  --bullet-border: #994D96;
+  --footer-background: #FFF2FF;
+}
+
+body, button, pre {
+  font-family: 'Nunito', sans-serif;
+}
+
+p, h2 {
+  margin: var(--spacing-00);
 }
 
 html,
@@ -18,11 +130,14 @@ body {
   overflow-x: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: var(--foreground);
-  margin: 0px;
+  margin: var(--spacing-00);
   background: var(--background);
-  font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
