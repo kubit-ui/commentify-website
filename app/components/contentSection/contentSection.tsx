@@ -11,9 +11,9 @@ function ContentSection() {
           Figma design projects.
         </p>
         <p>Contribute or make request in the GitHub project.</p>
-        <p>
-          <strong>Welcome to the community!</strong>
-        </p>
+        <h2 className={styles["contentSection__text--header"]}>
+          Welcome to the Commentify community!
+        </h2>
       </div>
     </section>
   );

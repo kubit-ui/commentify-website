@@ -10,7 +10,7 @@ const Footer = React.forwardRef(
             {/* Logo */}
             <Image
               src={"./kubit_logo.svg"}
-              alt={"Kubit logo"}
+              alt={"Kubit - Digital Design System and Figma Plugin Development"}
               height={30}
               width={70}
             />
@@ -25,7 +25,7 @@ const Footer = React.forwardRef(
               {/* Logo */}
               <Image
                 src={"./icon_contact.svg"}
-                alt={"Contact icon"}
+                alt={"Contact Kubit Support - Email icon"}
                 height={20}
                 width={20}
               />

@@ -41,13 +41,13 @@ function FeaturesSection() {
               styles["featuresSection__featuresCard__intro__accordion"]
             }
           >
-            <span
+            <h2
               className={
                 styles["featuresSection__featuresCard__intro__accordion__title"]
               }
             >
               What can you achieve with Commentify?
-            </span>
+            </h2>
             <Accordion allowMultiple={false} />
           </div>
         </div>
@@ -58,13 +58,13 @@ function FeaturesSection() {
               styles["featuresSection__featuresCard__content__section"]
             }
           >
-            <p
+            <h3
               className={
                 styles["featuresSection__featuresCard__content__title"]
               }
             >
               Team selector
-            </p>
+            </h3>
             <div
               className={
                 styles[
@@ -88,13 +88,13 @@ function FeaturesSection() {
               styles["featuresSection__featuresCard__content__section"]
             }
           >
-            <p
+            <h3
               className={
                 styles["featuresSection__featuresCard__content__title"]
               }
             >
               Descriptions
-            </p>
+            </h3>
             <div
               className={
                 styles[
@@ -111,13 +111,13 @@ function FeaturesSection() {
               styles["featuresSection__featuresCard__content__section"]
             }
           >
-            <p
+            <h3
               className={
                 styles["featuresSection__featuresCard__content__title"]
               }
             >
               Actions
-            </p>
+            </h3>
             <div
               className={
                 styles[

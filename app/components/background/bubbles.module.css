@@ -5,13 +5,15 @@
     z-index: -1;
     overflow: hidden;
     mix-blend-mode: lighten;
-  }
+}
 
 .oval {
     position: absolute;
     width: 40%;
     height: 55%;
     border-radius: 50%;
+    /* Performance optimizations */
+    will-change: transform;
 }
 
 .oval1 {
@@ -19,8 +21,8 @@
     background: radial-gradient(51.1% 40.15% at 52.33% 53.49%, var(--light-blue-bubble) 10.5%, rgba(40, 43, 103, 0.00) 93%);
     background-blend-mode: lighten;
     filter: blur(30px);
-    top: 0;
-    left: 0;
+    /* Initial position using transform instead of top/left */
+    transform: translate(20vw, 10vh);
 }
 
 .oval2 {
@@ -28,30 +30,103 @@
     background: radial-gradient(51.1% 40.15% at 52.33% 53.49%, var(--dark-blue-bubble) 8.5%, rgba(40, 43, 103, 0.00) 93%);
     background-blend-mode: lighten;
     filter: blur(30px);
-    transform: rotate(25deg);
-    top: 50%;
-    right: 0;
+    /* Initial position - matches first keyframe of move2 */
+    transform: rotate(25deg) translate(50vw, 5vh);
 }
 
 @keyframes move1 {
-    0% { top: 10%; left: 20%; }
-    14.29% { top: 30%; left: 10%; }
-    28.57% { top: 40%; left: 0%; }
-    42.86% { top: 30%; left: -10%; }
-    57.14% { top: 15%; left: -15%; }
-    71.43% { top: 0%; left: 0%; }
-    85.71% { top: -5%; left: 10%; }
-    100% { top: 10%; left: 20%; }
+    0% {
+        transform: translate(20vw, 10vh);
+    }
+
+    14.29% {
+        transform: translate(10vw, 30vh);
+    }
+
+    28.57% {
+        transform: translate(0vw, 40vh);
+    }
+
+    42.86% {
+        transform: translate(-10vw, 30vh);
+    }
+
+    57.14% {
+        transform: translate(-15vw, 15vh);
+    }
+
+    71.43% {
+        transform: translate(0vw, 0vh);
+    }
+
+    85.71% {
+        transform: translate(10vw, -5vh);
+    }
+
+    100% {
+        transform: translate(20vw, 10vh);
+    }
 }
 
 @keyframes move2 {
-    0% { top: 5%; left: 37%; }
-    12.5% { top: -8%; left: 45%; }
-    25% { top: -15%; left: 55%; }
-    37.5% { top: -10%; left: 66%; }
-    50% { top: 5%; left: 73%; }
-    62.5% { top: 15%; left: 66%; }
-    75% { top: 22%; left: 60%; }
-    87.5% { top: 10%; left: 45%; }
-    100% { top: 5%; left: 37%; }
+    0% {
+        transform: rotate(25deg) translate(50vw, 5vh);
+    }
+
+    12.5% {
+        transform: rotate(25deg) translate(60vw, -8vh);
+    }
+
+    25% {
+        transform: rotate(25deg) translate(70vw, -15vh);
+    }
+
+    37.5% {
+        transform: rotate(25deg) translate(80vw, -10vh);
+    }
+
+    50% {
+        transform: rotate(25deg) translate(85vw, 5vh);
+    }
+
+    62.5% {
+        transform: rotate(25deg) translate(75vw, 15vh);
+    }
+
+    75% {
+        transform: rotate(25deg) translate(65vw, 22vh);
+    }
+
+    87.5% {
+        transform: rotate(25deg) translate(55vw, 10vh);
+    }
+
+    100% {
+        transform: rotate(25deg) translate(50vw, 5vh);
+    }
+}
+
+/* Performance optimizations for mobile devices */
+@media (max-width: 768px) {
+
+    .oval1,
+    .oval2 {
+        /* Reduce blur intensity on mobile for better performance */
+        filter: blur(15px);
+        /* Slightly reduce animation duration to be less resource intensive */
+        animation-duration: 18s;
+    }
+}
+
+/* Additional optimization for low-end devices */
+@media (max-width: 480px) {
+
+    .oval1,
+    .oval2 {
+        filter: blur(10px);
+        animation-duration: 20s;
+        /* Reduce size on very small screens */
+        width: 50%;
+        height: 50%;
+    }
 }

@@ -1,29 +1,57 @@
-
 .carouselSection {
     display: flex;
     align-items: flex-start;
     width: 100%;
     padding: var(--spacing-550) var(--spacing-500);
-    overflow-x: scroll;
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-.carouselSection::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
-}
-
-.carouselSection__cards > * {
-    min-width: var(--size-2500); /* Ancho mínimo */
+    overflow: hidden;
 }
 
 .carouselSection__cards {
     display: flex;
     gap: var(--spacing-500);
+    width: fit-content;
+}
+
+/* Track container for marquee effect */
+.carouselSection__track {
+    display: flex;
+    gap: var(--spacing-500);
+    width: fit-content;
+}
+
+/* Marquee animation */
+.carouselSection__track--marquee {
+    animation: marqueeMove 30s linear infinite;
+    /* Start the animation from the beginning position for seamless loop */
+    transform: translateX(0);
+}
+
+@keyframes marqueeMove {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.carouselSection__track>* {
+    min-width: var(--size-2500);
+    flex-shrink: 0;
+    /* Prevent cards from shrinking */
 }
 
 @media (max-width: 768px) {
-    .carouselSection__cards > * {
-        min-width: var(--size-2000); /* Adjusted minimum width for smaller screens */
+    .carouselSection__track>* {
+        min-width: var(--size-1500);
+        /* Reduced from size-2000 to size-1500 (224px) */
+        width: var(--size-1500);
+        /* Force specific width instead of 100% */
+    }
+
+    /* Faster marquee on mobile for better experience */
+    .carouselSection__track--marquee {
+        animation: marqueeMove 20s linear infinite;
     }
 }

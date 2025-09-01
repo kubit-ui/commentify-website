@@ -37,10 +37,13 @@
     gap: var(--spacing-400);
     align-items: center;
 }
+
 .heroSection__header--left__logo {
-    width: 100%; /* Adjust logo size as needed */
+    width: 100%;
+    /* Adjust logo size as needed */
     max-width: 150px;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
 }
 
 /* Text next to Logo 
@@ -51,21 +54,42 @@
     align-items: flex-start;
     gap: var(--spacing-100)
 }
+
 .heroSection__header--left__title {
-    width: 100%; /* Adjust logo size as needed */
+    width: 100%;
+    /* Adjust logo size as needed */
     min-width: 180px;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
 }
+
 .heroSection__header--left__logo__subtitle {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-100)
+    gap: var(--spacing-100);
+    color: var(--foreground);
+    margin: 0;
+    opacity: 0.8;
 }
 
 /* Text content in left header
 -------------------------------------------------- */
 .heroSection__header--left__text {
     font-size: var(--font-size-xlarge);
+}
+
+/* H1 inside text content - styled as paragraph for visual consistency */
+.heroSection__header--left__text h1 {
+    font-size: inherit;
+    /* Inherit the xlarge font size from parent */
+    font-weight: normal;
+    /* Normal weight like a paragraph */
+    line-height: 1.5;
+    /* Standard paragraph line height */
+    margin: 0;
+    /* Remove default H1 margins */
+    color: inherit;
+    /* Inherit color from parent */
 }
 
 /* Card container in header
@@ -121,8 +145,10 @@
     border: var(--border-25) solid var(--border-button);
     background: var(--foreground);
     cursor: pointer;
-    position: relative; /* Required for the overlay */
-    overflow: hidden; /* Ensures the overlay doesn't spill out */
+    position: relative;
+    /* Required for the overlay */
+    overflow: hidden;
+    /* Ensures the overlay doesn't spill out */
 }
 
 /* Button hover effect
@@ -132,21 +158,24 @@
     position: absolute;
     inset: 0;
     background: rgba(231, 231, 231, 0.25);
-    opacity: 0; /* Initially invisible */
+    opacity: 0;
+    /* Initially invisible */
     transition: opacity 0.3s ease;
-    z-index: 1; /* Ensure the overlay is above the button content */
+    z-index: 1;
+    /* Ensure the overlay is above the button content */
 }
 
 .heroSection__bottomInfo__discoverButton:hover::after {
     opacity: 1;
 }
 
-/* Tablet Breakpoint (max-width: 900px) */
+/* Tablet Breakpoint (max-width: 1100px) */
 @media (max-width: 1100px) {
     .heroSection {
         /* Adjust header padding */
         padding: var(--spacing-00) var(--spacing-300);
     }
+
     /* Header layout changes to vertical */
     .heroSection__header {
         flex-direction: column;
@@ -163,6 +192,7 @@
     /* Left header adjustments */
     .heroSection__header--left {
         padding-top: var(--spacing-300);
+        gap: var(--spacing-400);
         align-items: center;
         text-align: center;
     }
@@ -170,6 +200,15 @@
     /* Font size reduction */
     .heroSection__header--left__text {
         font-size: var(--font-size-xlarge);
+    }
+
+    /* H1 inside text content - maintain paragraph styling in tablet */
+    .heroSection__header--left__text h1 {
+        font-size: inherit;
+        font-weight: normal;
+        line-height: 1.5;
+        margin: 0;
+        color: inherit;
     }
 
     /* Center card container */
@@ -185,7 +224,7 @@
 
 /* Mobile Breakpoint (max-width: 480px) */
 @media (max-width: 480px) {
-    
+
     /* Card container changes to vertical layout */
     .heroSection__header__cardContainer {
         flex-direction: column;
@@ -201,6 +240,15 @@
     /* Further font size reduction */
     .heroSection__header--left__text {
         font-size: var(--font-size-medium);
+    }
+
+    /* H1 inside text content - maintain paragraph styling in mobile */
+    .heroSection__header--left__text h1 {
+        font-size: inherit;
+        font-weight: normal;
+        line-height: 1.5;
+        margin: 0;
+        color: inherit;
     }
 
     .heroSection__header--left__logocontainer {
@@ -224,31 +272,34 @@
     }
 }
 
-/* Animation styles - commented out for now 
+/* Animation styles
 -------------------------------------------------- */
 /* .slide-up {
     position: relative;
-    bottom: -100%;
-    animation: slideUp 2s forwards;
+    opacity: 0;
+    transform: translateY(200px);
+    animation: slideUp 1.2s forwards ease-out; 
 }
-
-.delay-0 {
+.delay-first {
     animation-delay: 0s;
 }
 
-.delay-3 {
-    animation-delay: 2s;
+.delay-second {
+    animation-delay: 0.8s;
 }
 
-.delay-6 {
-    animation-delay: 4s;
+.delay-third {
+    animation-delay: 1.6s;
 }
+
 
 @keyframes slideUp {
     0% {
-        bottom: -100%;
+        opacity: 0;
+        transform: translateY(200px);
     }
     100% {
-        bottom: 0;
+        opacity: 1;
+        transform: translateY(0);
     }
 } */

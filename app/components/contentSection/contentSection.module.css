@@ -19,6 +19,13 @@
     text-align: center;
 }
 
+.contentSection__text--header {
+    font-size: var(--font-size-xxlarge);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    color: inherit;
+}
+
 /* Paragraph spacing
 -------------------------------------------------- */
 .contentSection__text p:not(:last-child) {
@@ -30,6 +37,7 @@
 
 /* Tablet Breakpoint (max-width: 768px) */
 @media (max-width: 768px) {
+
     /* Adjust container padding */
     .contentSection {
         padding: var(--spacing-400) var(--spacing-400);
@@ -48,6 +56,7 @@
 
 /* Mobile Breakpoint (max-width: 480px) */
 @media (max-width: 480px) {
+
     /* Further reduce container padding */
     .contentSection {
         padding: var(--spacing-300) var(--spacing-300);

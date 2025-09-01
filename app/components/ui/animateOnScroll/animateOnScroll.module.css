@@ -1,0 +1,65 @@
+/* 
+ * ANIMATION STYLES
+ * Reusable animation classes for scroll-based animations
+ */
+
+/* Appearing animation class - sets up transitions for elements that appear on scroll */
+.appearing-animation {
+  opacity: 0;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.sliding-animation {
+  transition: transform 2s ease-out;
+}
+
+.sliding-animation.from-right {
+  transform: translateX(30%);
+  /* Starts just outside the viewport edge */
+}
+
+.sliding-animation.from-left {
+  transform: translateX(-100%);
+}
+
+/* Animation directions */
+.from-bottom {
+  transform: translateY(150px);
+}
+
+.from-left {
+  transform: translateX(-80px);
+}
+
+.from-right {
+  transform: translateX(80px);
+}
+
+/* Visible state - applied when element enters viewport */
+.appearing-animation.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+.sliding-animation.visible {
+  transform: translateX(0);
+}
+
+/* Animation delays - using transition-delay instead of animation-delay */
+.delay-first {
+  transition-delay: 0s;
+}
+
+.delay-second {
+  transition-delay: 0.8s;
+}
+
+.delay-third {
+  transition-delay: 1.6s;
+}
+
+
+/* Wall effect container - creates the "behind the wall" effect */
+.wall-container {
+  overflow: hidden;
+}
