@@ -1,65 +1,146 @@
-/* 
- * ANIMATION STYLES
- * Reusable animation classes for scroll-based animations
- */
+/* =============================================================================
+   SCROLL-TRIGGERED ANIMATIONS
+   Reusable animation classes for performant scroll-based entrance effects
+   ============================================================================= */
 
-/* Appearing animation class - sets up transitions for elements that appear on scroll */
+/* =============================================================================
+   BASE ANIMATION TYPES
+   ============================================================================= */
+
+/* Appearing animation - fade in with transform */
 .appearing-animation {
   opacity: 0;
-  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  transition: opacity var(--transition-duration-slow)
+      var(--transition-easing-smooth),
+    transform var(--transition-duration-slow) var(--transition-easing-smooth);
+  will-change: opacity, transform;
 }
 
+/* Sliding animation - transform-only animation */
 .sliding-animation {
-  transition: transform 2s ease-out;
+  transition: transform var(--transition-duration-slow)
+    var(--transition-easing-smooth);
+  will-change: transform;
 }
 
+/* =============================================================================
+   ANIMATION DIRECTIONS
+   ============================================================================= */
+
+/* From bottom direction */
+.from-bottom {
+  transform: translateY(var(--spacing-48)); /* 192px */
+}
+
+/* From left direction */
+.from-left {
+  transform: translateX(calc(var(--spacing-22) * -1)); /* -88px */
+}
+
+/* From right direction */
+.from-right {
+  transform: translateX(var(--spacing-22)); /* 88px */
+}
+
+/* Special sliding animation directions */
 .sliding-animation.from-right {
   transform: translateX(30%);
-  /* Starts just outside the viewport edge */
 }
 
 .sliding-animation.from-left {
   transform: translateX(-100%);
 }
 
-/* Animation directions */
-.from-bottom {
-  transform: translateY(150px);
-}
+/* =============================================================================
+   VISIBLE STATES
+   ============================================================================= */
 
-.from-left {
-  transform: translateX(-80px);
-}
-
-.from-right {
-  transform: translateX(80px);
-}
-
-/* Visible state - applied when element enters viewport */
+/* Appearing animation visible state */
 .appearing-animation.visible {
   opacity: 1;
   transform: translateY(0) translateX(0);
 }
 
+/* Sliding animation visible state */
 .sliding-animation.visible {
   transform: translateX(0);
 }
 
-/* Animation delays - using transition-delay instead of animation-delay */
+/* =============================================================================
+   ANIMATION DELAYS
+   Staggered animation timing for coordinated effects
+   ============================================================================= */
+
 .delay-first {
-  transition-delay: 0s;
+  transition-delay: 0ms;
 }
 
 .delay-second {
-  transition-delay: 0.8s;
+  transition-delay: 800ms;
 }
 
 .delay-third {
-  transition-delay: 1.6s;
+  transition-delay: 1600ms;
 }
 
+/* =============================================================================
+   SPECIAL EFFECTS
+   ============================================================================= */
 
-/* Wall effect container - creates the "behind the wall" effect */
+/* Wall effect container - creates overflow masking */
 .wall-container {
   overflow: hidden;
+  position: relative;
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .appearing-animation,
+  .sliding-animation {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .delay-first,
+  .delay-second,
+  .delay-third {
+    transition-delay: 0ms;
+  }
+}
+
+/* GPU acceleration hint */
+.appearing-animation,
+.sliding-animation {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* =============================================================================
+   RESPONSIVE CONSIDERATIONS
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  /* Reduce animation distances on mobile */
+  .from-bottom {
+    transform: translateY(var(--spacing-16)); /* 64px */
+  }
+
+  .from-left {
+    transform: translateX(calc(var(--spacing-12) * -1)); /* -48px */
+  }
+
+  .from-right {
+    transform: translateX(var(--spacing-12)); /* 48px */
+  }
+
+  /* Faster animations on mobile */
+  .appearing-animation,
+  .sliding-animation {
+    transition-duration: 600ms;
+  }
 }

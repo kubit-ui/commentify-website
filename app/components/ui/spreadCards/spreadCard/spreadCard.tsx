@@ -1,9 +1,11 @@
 import React from "react";
-import styles from "./spreadCard.module.css";
+
 import {
   CardColor,
   ColoredCardContent,
 } from "../../coloredCard/coloredCard.types";
+
+import styles from "./spreadCard.module.css";
 
 interface SpreadCardProps {
   color: `${CardColor}`;

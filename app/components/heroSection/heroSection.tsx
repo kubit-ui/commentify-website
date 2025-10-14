@@ -1,34 +1,56 @@
-import React from "react";
-import ColoredCard from "../ui/coloredCard/coloredCard";
 import Image from "next/image";
-import styles from "./heroSection.module.css";
-import AnimateOnScroll from "../ui/animateOnScroll/animateOnScroll";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import React from "react";
 
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import AnimateOnScroll from "../ui/animateOnScroll/animateOnScroll";
+import ColoredCard from "../ui/coloredCard/coloredCard";
+
+import styles from "./heroSection.module.css";
+
+/**
+ * Animation delay type for consistent animation timing
+ */
+type AnimationDelay = "delay-first" | "delay-second" | "delay-third";
+
+/**
+ * HeroSection Component
+ * 
+ * Main hero section of the Commentify website featuring:
+ * - Animated logo and branding elements
+ * - Descriptive heading with key value propositions
+ * - Interactive colored cards showcase
+ * - Call-to-action with external link to Figma plugin
+ * 
+ * @returns The hero section component
+ */
 function HeroSection() {
-  // Check if we're on desktop (screens larger than 1100px)
+  // Responsive breakpoint for desktop-specific animations
   const isDesktop = useMediaQuery("(min-width: 1101px)");
 
-  // Use delay-third for desktop, delay-first for tablet/mobile
-  const bottomSectionDelay = isDesktop ? "delay-third" : "delay-first";
+  // Conditional animation delay based on screen size
+  const bottomSectionDelay: AnimationDelay = isDesktop ? "delay-third" : "delay-first";
 
   return (
     <section className={styles["heroSection"]}>
       <div className={styles["heroSection__header"]}>
         <div className={styles["heroSection__header--left"]}>
           <div className={styles["heroSection__header--left__logocontainer"]}>
-            <img
-              className={styles["heroSection__header--left__logo"]}
-              src="/commentify_logo.svg"
+            <Image
+              priority
               alt="Commentify Figma Plugin Logo - Comment Management Tool"
-              loading="eager"
+              className={styles["heroSection__header--left__logo"]}
+              height={40}
+              src="/commentify_logo.svg"
+              width={40}
             />
             <div className={styles["heroSection__header--left__logo__text"]}>
-              <img
-                className={styles["heroSection__header--left__title"]}
-                src="/commentify_text.svg"
+              <Image
+                priority
                 alt="Commentify - Ultimate Figma Comments and Layer Annotations Plugin"
-                loading="eager"
+                className={styles["heroSection__header--left__title"]}
+                height={30}
+                src="/commentify_text.svg"
+                width={200}
               />
               <p
                 className={styles["heroSection__header--left__logo__subtitle"]}
@@ -40,12 +62,12 @@ function HeroSection() {
 
           {/* Main descriptive heading with animation */}
           <AnimateOnScroll
+            wallEffect
             animationType="appearing-animation"
-            direction="from-bottom"
-            delay="delay-second"
+            as="h1"
             className={styles["heroSection__header--left__text"]}
-            as={"h1"}
-            wallEffect={true}
+            delay="delay-second"
+            direction="from-bottom"
           >
             Maximize the <strong>utility of comments</strong> in Figma.{" "}
             <strong>Manage layer annotations</strong> seamlessly with your team.
@@ -58,9 +80,9 @@ function HeroSection() {
         <div className={`${styles["heroSection__header__cardContainer"]}`}>
           <AnimateOnScroll
             animationType="appearing-animation"
-            direction="from-bottom"
-            delay="delay-first"
             className={styles["heroSection__header__cardContainer__cardColumn"]}
+            delay="delay-first"
+            direction="from-bottom"
             wallEffect={false}
           >
             <ColoredCard color="orange" />
@@ -68,10 +90,10 @@ function HeroSection() {
           </AnimateOnScroll>
 
           <AnimateOnScroll
-            direction="from-bottom"
-            delay="delay-first"
+            wallEffect
             className={`${styles["heroSection__header__cardContainer__cardColumn"]} ${styles["heroSection__header__cardContainer__cardColumn--right"]}`}
-            wallEffect={true}
+            delay="delay-first"
+            direction="from-bottom"
           >
             <ColoredCard color="blue" />
             <ColoredCard color="pink" />
@@ -81,12 +103,12 @@ function HeroSection() {
 
       {/* Bottom section with sliding animation from bottom */}
       <AnimateOnScroll
+        wallEffect
         animationType="appearing-animation"
-        direction="from-bottom"
-        delay={bottomSectionDelay}
         className={styles["heroSection__bottomInfo"]}
+        delay={bottomSectionDelay}
+        direction="from-bottom"
         threshold={0.2}
-        wallEffect={true}
       >
         <h2>
           The ultimate plugin for maximizing the utility of comments in Figma
@@ -103,14 +125,12 @@ function HeroSection() {
           target="_blank"
         >
           Discover it now
-          {
-            <Image
-              src={"/icon_link-external.svg"}
-              alt={"Download Commentify Figma Plugin - External link icon"}
+          <Image
+              alt="Download Commentify Figma Plugin - External link icon"
               height={18}
+              src="/icon_link-external.svg"
               width={18}
             />
-          }
         </a>
       </AnimateOnScroll>
     </section>

@@ -1,19 +1,46 @@
 import React from "react";
-import styles from "./zoomedFooterButtonView.module.css";
-import {
-  CardColor,
-  ColoredCardContent as ColoredCardData,
-} from "../coloredCard/coloredCard.types";
+
 import {
   Content as ColoredCardContent,
   Footer as ColoredCardFooter,
 } from "../coloredCard/coloredCard";
+import {
+  CardColor,
+  ColoredCardContent as ColoredCardData,
+} from "../coloredCard/coloredCard.types";
 
+import styles from "./zoomedFooterButtonView.module.css";
+
+/**
+ * ZoomedFooterButtonView Props Interface
+ */
+interface ZoomedFooterButtonViewProps {
+  /** Color theme for the zoomed footer view */
+  color?: keyof typeof ColoredCardData;
+  /** Optional additional CSS class name */
+  className?: string;
+}
+
+/**
+ * ZoomedFooterButtonView Component
+ * 
+ * Displays a zoomed-in view of colored card footer with action buttons.
+ * Shows truncated content and emphasizes the footer action section.
+ * 
+ * Features:
+ * - Intelligent content truncation (respects word boundaries)
+ * - Animated footer button emphasis on zoom
+ * - Color-themed styling based on selected card color
+ * - Responsive design for all device sizes
+ * - Accessible button interactions
+ * 
+ * @param props - Component props with color and optional className
+ * @returns The zoomed footer view component
+ */
 function ZoomedFooterButtonView({
-  color = "blue",
-}: {
-  color?: `${CardColor}`;
-}) {
+  color = CardColor.BLUE,
+  className,
+}: ZoomedFooterButtonViewProps) {
   const contentData = ColoredCardData[color].content;
 
   const truncatedContent = {
@@ -22,26 +49,40 @@ function ZoomedFooterButtonView({
   };
 
   return (
-    <div className={`${styles["zoomFooter"]} coloredCard-${color}`}>
-      {/* Content container */}
-      <div className={styles["zoomFooter__content"]}>
+    <div 
+      aria-label={`Zoomed view of ${color} card footer actions`}
+      className={`${styles.zoomFooter} coloredCard-${color} ${className || ''}`}
+      role="region"
+    >
+      {/* Content container with truncated text */}
+      <div className={styles.zoomFooter__content}>
         <ColoredCardContent
-          title={truncatedContent.title}
           description={truncatedContent.description}
+          title={truncatedContent.title}
         />
       </div>
 
-      {/* Footer container */}
-      <div className={styles["zoomFooter__footer"]}>
+      {/* Footer container with action buttons */}
+      <div 
+        aria-label="Card action buttons"
+        className={styles.zoomFooter__footer}
+        role="complementary"
+      >
         <ColoredCardFooter />
       </div>
     </div>
   );
 }
 
-// Function that truncates descriptions intelligently
+/**
+ * Intelligently truncates descriptions to show the second half of content
+ * while respecting word boundaries and line breaks.
+ * 
+ * @param description - The full description text to truncate
+ * @returns The truncated description (second half)
+ */
 function getHalfDescription(description: string): string {
-  // If the description contains line breaks, take half of the lines
+  // If the description contains line breaks, take the second half of the lines
   if (description.includes("\n")) {
     const lines = description.split("\n");
     const halfLinesIndex = Math.ceil(lines.length / 2);

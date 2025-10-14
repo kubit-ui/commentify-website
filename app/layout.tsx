@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+
 import FloatingBubbles from "./components/background/bubbles";
 import JsonLd, {
   commentifySchema,

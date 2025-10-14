@@ -1,11 +1,165 @@
+/* =============================================================================
+   VIDEO COMPONENT STYLES
+   Responsive video player with accessibility and error handling
+   ============================================================================= */
+
+/* =============================================================================
+   VIDEO CONTAINER
+   ============================================================================= */
+
 .videoContainer {
   position: relative;
-  border-radius: var(--border-radius-large);
+  width: 100%;
+  max-width: 100%;
+
+  /* Visual styling */
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background-color: var(--card-background);
+  background-color: var(--color-surface-primary);
+
+  /* Subtle shadow for depth */
+  box-shadow: var(--shadow-md);
+
+  /* Aspect ratio container for consistent sizing */
+  aspect-ratio: 16 / 9;
 }
+
+/* =============================================================================
+   VIDEO ELEMENT
+   ============================================================================= */
 
 .video {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+
+  /* Smooth transitions */
+  transition: opacity var(--transition-duration-medium)
+    var(--transition-easing-smooth);
+
+  /* Performance optimization */
+  will-change: transform;
+}
+
+/* Focus state for accessibility */
+.video:focus {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   ERROR STATES
+   ============================================================================= */
+
+.videoError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-primary);
+  border: var(--border-width-thin) dashed var(--color-border-button);
+}
+
+.errorMessage {
+  text-align: center;
+  padding: var(--spacing-8);
+  color: var(--color-surface-foreground);
+}
+
+.errorMessage p {
+  margin: var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0);
+  font-size: var(--font-size-lg);
+  opacity: 0.7;
+}
+
+.retryButton {
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-accent-blue);
+  color: var(--color-foreground-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+
+  /* Transitions */
+  transition: background-color var(--transition-duration-fast)
+      var(--transition-easing-smooth),
+    transform var(--transition-duration-fast) var(--transition-easing-smooth);
+}
+
+.retryButton:hover {
+  background-color: var(--color-accent-teal);
+  transform: translateY(-1px);
+}
+
+.retryButton:active {
+  transform: translateY(0);
+}
+
+.retryButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   LOADING STATES
+   ============================================================================= */
+
+.video[data-loading='true'] {
+  opacity: 0.7;
+}
+
+.video[data-loading='false'] {
+  opacity: 1;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .videoContainer {
+    border-radius: var(--radius-md);
+    aspect-ratio: 4 / 3; /* Better aspect ratio for mobile */
+  }
+
+  .errorMessage {
+    padding: var(--spacing-4);
+  }
+
+  .errorMessage p {
+    font-size: var(--font-size-md);
+  }
+
+  .retryButton {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-1_5) var(--spacing-3);
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .video,
+  .retryButton {
+    transition: none;
+  }
+
+  .retryButton:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .videoError {
+    border-color: currentColor;
+    background-color: Canvas;
+  }
+
+  .retryButton {
+    border: 1px solid currentColor;
+  }
 }
