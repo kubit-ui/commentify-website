@@ -1,46 +1,92 @@
-import React, { useState, useEffect } from "react";
-import styles from "./carouselSection.module.css";
-import ColoredCard from "../ui/coloredCard/coloredCard";
+import React, { useState, useEffect, useCallback } from "react";
+
 import AnimateOnScroll from "../ui/animateOnScroll/animateOnScroll";
+import ColoredCard from "../ui/coloredCard/coloredCard";
+import { CardColor } from "../ui/coloredCard/coloredCard.types";
 
+import styles from "./carouselSection.module.css";
+
+/**
+ * Card data interface
+ */
+interface CardData {
+  color: CardColor;
+  key: string;
+}
+
+/**
+ * Static card data configuration - moved outside component to prevent re-renders
+ */
+const CARDS_DATA: CardData[] = [
+  { color: CardColor.ORANGE, key: "orange" },
+  { color: CardColor.GREEN, key: "green" },
+  { color: CardColor.PINK, key: "pink" },
+  { color: CardColor.BLUE, key: "blue" },
+];
+
+/**
+ * CarouselSection Component
+ * 
+ * Displays an animated horizontal carousel of colored cards with marquee effect.
+ * Features a sliding entrance animation followed by an infinite horizontal scroll.
+ * 
+ * Features:
+ * - Initial slide-in animation from the right
+ * - Automatic marquee activation after animation completion
+ * - Smooth infinite horizontal scrolling
+ * - Duplicated card sets for seamless loop
+ * - Performance optimized with proper cleanup
+ * 
+ * @returns The carousel section component
+ */
 function CarouselSection() {
-  const [showMarquee, setShowMarquee] = useState(false);
+  const [showMarquee, setShowMarquee] = useState<boolean>(false);
 
-  const cardsData = [
-    { color: "orange" as const, key: "orange" },
-    { color: "green" as const, key: "green" },
-    { color: "pink" as const, key: "pink" },
-    { color: "blue" as const, key: "blue" },
-  ];
-
-  // Activate marquee effect after initial slide animation completes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMarquee(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+  /**
+   * Activate marquee effect after initial slide animation completes
+   */
+  const activateMarquee = useCallback(() => {
+    setShowMarquee(true);
   }, []);
+
+  useEffect(() => {
+    const marqueeTimer = setTimeout(activateMarquee, 2000);
+
+    return () => {
+      clearTimeout(marqueeTimer);
+    };
+  }, [activateMarquee]);
+  /**
+   * Render carousel cards with duplication for seamless loop effect
+   */
+  const renderCards = useCallback((prefix: string) => {
+    return CARDS_DATA.map((card) => (
+      <ColoredCard key={`${prefix}-${card.key}`} color={card.color} />
+    ));
+  }, []);
+
   return (
-    <section className={styles["carouselSection"]}>
+    <section 
+      aria-label="Animated carousel showcase"
+      className={styles.carouselSection}
+      role="region"
+    >
       <AnimateOnScroll
         animationType="sliding-animation"
-        direction="from-right"
+        className={styles.carouselSection__cards}
         delay="delay-first"
-        className={styles["carouselSection__cards"]}
+        direction="from-right"
       >
         <div
-          className={`${styles["carouselSection__track"]} ${
+          aria-hidden="true"
+          className={`${styles.carouselSection__track} ${
             showMarquee ? styles["carouselSection__track--marquee"] : ""
           }`}
+          role="presentation"
         >
           {/* Always show both sets when marquee is active to avoid layout shifts */}
-          {cardsData.map((card) => (
-            <ColoredCard key={`first-${card.key}`} color={card.color} />
-          ))}
-          {cardsData.map((card) => (
-            <ColoredCard key={`second-${card.key}`} color={card.color} />
-          ))}
+          {renderCards("first")}
+          {renderCards("second")}
         </div>
       </AnimateOnScroll>
     </section>

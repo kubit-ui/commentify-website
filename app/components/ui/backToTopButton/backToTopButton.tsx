@@ -1,100 +1,204 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
+import React, { 
+  useRef, 
+  useState, 
+  useEffect, 
+  useCallback, 
+  useImperativeHandle,
+  forwardRef
+} from "react";
+
 import styles from "./backToTopButton.module.css";
 
+/**
+ * Props interface for the BackToTopButton component
+ */
 interface BackToTopButtonProps {
+  /** Bottom position offset in pixels from the viewport bottom */
   bottomPosition?: number;
+  /** Scroll offset in pixels before the button becomes visible */
   visibilityScrollOffset?: number;
+  /** Reference to element that should stop the button's positioning */
   stopElement?: React.RefObject<HTMLElement | null>;
+  /** Custom click handler */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /** Custom aria-label for accessibility */
+  ariaLabel?: string;
+  /** Whether to use smooth scrolling behavior */
+  smoothScroll?: boolean;
+  /** Custom CSS class name */
+  className?: string;
 }
 
-const BackToTopButton = React.forwardRef(
+/**
+ * BackToTopButton component - A floating action button that scrolls to page top
+ * 
+ * Features:
+ * - Appears/disappears based on scroll position
+ * - Stops positioning relative to footer or other elements
+ * - Smooth scroll animation
+ * - Accessible with proper ARIA attributes
+ * - Throttled scroll event handling for performance
+ * 
+ * @param bottomPosition - Distance from viewport bottom (default: 32px)
+ * @param visibilityScrollOffset - Scroll distance before showing button (default: 300px) 
+ * @param stopElement - Element reference to stop button positioning
+ * @param onClick - Custom click handler
+ * @param ariaLabel - Custom accessibility label
+ * @param smoothScroll - Enable smooth scrolling (default: true)
+ * @param className - Additional CSS classes
+ * @returns BackToTopButton component
+ */
+const BackToTopButton = forwardRef<HTMLButtonElement, BackToTopButtonProps>(
   (
     {
-      bottomPosition,
-      visibilityScrollOffset = 1,
+      bottomPosition = 32,
+      visibilityScrollOffset = 300,
       stopElement,
-      ...props
-    }: BackToTopButtonProps,
-    ref: React.ForwardedRef<HTMLButtonElement | null>
+      onClick,
+      ariaLabel = "Scroll to top of page",
+      smoothScroll = true,
+      className,
+    },
+    ref
   ) => {
-    const innerRef = React.useRef<HTMLButtonElement | null>(null);
-    const [visible, setVisible] = React.useState(false);
+    const innerRef = useRef<HTMLButtonElement | null>(null);
+    const [visible, setVisible] = useState<boolean>(false);
+    const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
-    React.useImperativeHandle(
+    // Forward the ref to inner button element
+    useImperativeHandle(
       ref,
-      () => {
-        return innerRef?.current as HTMLButtonElement;
-      },
+      () => innerRef.current || ({} as HTMLButtonElement),
       []
     );
 
-    const handleScrollListener = React.useCallback(() => {
-      const stop = stopElement?.current;
-      const backToTop = innerRef.current;
-      if (!backToTop) return;
+    /**
+     * Throttled scroll handler for better performance
+     */
+    const handleScrollListener = useCallback(() => {
+      if (typeof window === "undefined") return;
 
-      backToTop.style.bottom = "0px";
-      // if bottomPosition is present, it will use it to add the pixels indicated
-      let newBottomPosition = bottomPosition ?? 0;
+      const stopElementCurrent = stopElement?.current;
+      const buttonElement = innerRef.current;
+      
+      if (!buttonElement) return;
 
-      // update button bottom position when stop is present adding the distance
-      // between the button's bottom and the stop element's top
-      if (stop) {
-        const buttonBottom = backToTop.getBoundingClientRect().bottom;
-        const stopTop = stop.getBoundingClientRect().top;
-        const distance = buttonBottom - stopTop;
+      // Reset bottom position
+      let newBottomPosition = bottomPosition;
 
-        if (distance > 0) {
-          newBottomPosition += distance;
+      // Adjust button position relative to stop element if provided
+      if (stopElementCurrent) {
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const stopRect = stopElementCurrent.getBoundingClientRect();
+        const overlap = buttonRect.bottom - stopRect.top;
+
+        if (overlap > 0) {
+          newBottomPosition += overlap + 8; // Add 8px buffer
         }
       }
-      // update the position of the button (basically move it on top of stop element)
-      backToTop.style.bottom = `${newBottomPosition}px`;
 
+      // Update button position
+      buttonElement.style.bottom = `${newBottomPosition}px`;
+
+      // Determine visibility based on scroll position
       const currentScrollY = window.scrollY;
-      // the button will be shown after scrolling down the visibilityScrollOffset pixels
-      const isInHideZone = currentScrollY < visibilityScrollOffset;
-
-      setVisible(!isInHideZone);
+      const shouldBeVisible = currentScrollY >= visibilityScrollOffset;
+      
+      setVisible(shouldBeVisible);
     }, [stopElement, visibilityScrollOffset, bottomPosition]);
 
-    React.useEffect(() => {
-      handleScrollListener();
-      window.addEventListener("scroll", handleScrollListener);
+    /**
+     * Throttle function for scroll performance optimization
+     */
+    const throttle = useCallback((func: () => void, delay: number) => {
+      let timeoutId: NodeJS.Timeout;
+      let lastExecTime = 0;
+      
       return () => {
-        window.removeEventListener("scroll", handleScrollListener);
+        const currentTime = Date.now();
+        
+        if (currentTime - lastExecTime > delay) {
+          func();
+          lastExecTime = currentTime;
+        } else {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func();
+            lastExecTime = Date.now();
+          }, delay - (currentTime - lastExecTime));
+        }
       };
-    }, [handleScrollListener]);
+    }, []);
 
-    const handleOnClick = (
-      offset: number | React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      // call the onClick function if it is passed
-      props.onClick?.(
-        offset as React.MouseEvent<HTMLButtonElement, MouseEvent>
-      );
-    };
+    // Set up scroll listener with throttling
+    useEffect(() => {
+      if (typeof window === "undefined") return;
+
+      const throttledScrollHandler = throttle(handleScrollListener, 16); // ~60fps
+
+      // Initial call to set correct position
+      handleScrollListener();
+
+      window.addEventListener("scroll", throttledScrollHandler, { passive: true });
+      window.addEventListener("resize", handleScrollListener, { passive: true });
+
+      return () => {
+        window.removeEventListener("scroll", throttledScrollHandler);
+        window.removeEventListener("resize", handleScrollListener);
+      };
+    }, [handleScrollListener, throttle]);
+
+    /**
+     * Handle button click - scroll to top with optional custom behavior
+     */
+    const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      
+      setIsScrolling(true);
+      
+      const scrollToTop = () => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: smoothScroll ? "smooth" : "auto" 
+        });
+      };
+
+      scrollToTop();
+
+      // Reset scrolling state after animation
+      if (smoothScroll) {
+        setTimeout(() => setIsScrolling(false), 500);
+      } else {
+        setIsScrolling(false);
+      }
+
+      // Call custom onClick handler if provided
+      onClick?.(event);
+    }, [onClick, smoothScroll]);
 
     return (
       <button
         ref={innerRef}
-        className={`${styles["backToTop"]} ${
-          visible ? styles["visible"] : styles["hidden"]
-        }`}
-        onClick={() => handleOnClick(visibilityScrollOffset)}
+        aria-hidden={!visible}
+        aria-label={ariaLabel}
+        className={`${styles.backToTop} ${
+          visible ? styles.visible : styles.hidden
+        } ${isScrolling ? styles.scrolling : ""} ${className || ""}`}
+        tabIndex={visible ? 0 : -1}
+        type="button"
+        onClick={handleClick}
       >
         <Image
+          alt=""
+          height={24}
+          priority={false}
           src="/icon_up-arrow-alt.svg"
-          alt="Go back to top"
-          width={50}
-          height={50}
-          priority
+          width={24}
         />
+        <span className="sr-only">{ariaLabel}</span>
       </button>
     );
   }

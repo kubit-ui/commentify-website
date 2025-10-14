@@ -1,35 +1,140 @@
-/* STYLES FOR THE GHOST BUTTON */
+/* =============================================================================
+   GHOST BUTTON COMPONENT
+   Minimal button style with subtle interactions and optional icon support
+   ============================================================================= */
 
 .ghostButton {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-200);
-    background: none;
-    border: none;
-    color: var(--card-foreground);
-    cursor: pointer;
-    transition: transform 0.25s ease-in-out;
-}
-  
-.ghostButton .label {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-bold);
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
-    text-decoration-color: var(--card-foreground);
-    transition: text-decoration-color 0.25s ease-in-out;
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+
+  /* Reset button defaults */
+  background: none;
+  border: none;
+  padding: var(--spacing-1);
+  margin: var(--spacing-0);
+
+  /* Visual styling */
+  color: var(--card-foreground);
+  cursor: pointer;
+
+  /* Transitions */
+  transition: transform var(--transition-duration-fast)
+      var(--transition-easing-smooth),
+    opacity var(--transition-duration-fast) var(--transition-easing-smooth);
 }
 
-.ghostButton:hover .label {
-    text-decoration-color: transparent;
+/* =============================================================================
+   BUTTON STATES
+   ============================================================================= */
+
+.ghostButton:hover {
+  transform: translateY(-1px);
 }
+
+.ghostButton:active {
+  transform: translateY(0);
+}
+
+.ghostButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ghostButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* =============================================================================
+   BUTTON LABEL
+   ============================================================================= */
+
+.ghostButton__label {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+
+  /* Underline styling */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--card-foreground);
+
+  /* Smooth transition for underline */
+  transition: text-decoration-color var(--transition-duration-fast)
+    var(--transition-easing-smooth);
+}
+
+.ghostButton:hover .ghostButton__label {
+  text-decoration-color: transparent;
+}
+
+.ghostButton:disabled .ghostButton__label {
+  text-decoration-color: currentColor;
+}
+
+/* =============================================================================
+   BUTTON ICON
+   ============================================================================= */
+
+.ghostButton__icon {
+  flex-shrink: 0;
+  transition: transform var(--transition-duration-fast)
+    var(--transition-easing-smooth);
+}
+
+.ghostButton:hover .ghostButton__icon {
+  transform: translateX(2px);
+}
+
+.ghostButton:disabled .ghostButton__icon {
+  transform: none;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
 
 @media (max-width: 768px) {
-    .ghostButton .label {
-        font-size: var(--font-size-xsmall);
-    }
+  .ghostButton__label {
+    font-size: var(--font-size-base);
+  }
+
+  .ghostButton__icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ghostButton,
+  .ghostButton__label,
+  .ghostButton__icon {
+    transition: none;
+  }
+
+  .ghostButton:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ghostButton {
+    border: 1px solid currentColor;
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+
+  .ghostButton__label {
+    text-decoration-color: currentColor;
+  }
 }
